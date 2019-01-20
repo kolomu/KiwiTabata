@@ -1,3 +1,12 @@
-<button mat-raised-button>Click me!</button>
-
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <app-sidenav (closeSidenav)="sidenav.close()"></app-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header (openSidenav)="sidenav.toggle()"></app-header>
+    <main>
+      <h1>Demo</h1>
+      <router-outlet></router-outlet>  
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
