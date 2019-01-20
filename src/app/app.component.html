@@ -1,3 +1,5 @@
+isLoading: {{ isLoading$ | async}}
+
 <mat-sidenav-container>
   <mat-sidenav #sidenav role="navigation">
     <app-sidenav (closeSidenav)="sidenav.close()" [links]="links"></app-sidenav>
