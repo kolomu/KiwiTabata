@@ -1,15 +1,16 @@
 import { Action } from '@ngrx/store';
 
-/* Use constant to prevent mistyping */
-export const START_LOADING = '[UI] Start Loading';
-export const STOP_LOADING = '[UI] Stop Loading';
+export enum ActionTypes {
+    StartLoading = '[UI] Start Loading',
+    StopLoading = '[UI] Stop Loading'
+};
 
 export class StartLoading implements Action {
-    readonly type = START_LOADING;
+    readonly type = ActionTypes.StartLoading;
 }
 
 export class StopLoading implements Action {
-    readonly type = STOP_LOADING;
+    readonly type = ActionTypes.StopLoading;
 }
 
 /* This type exports classes which can be created via constructor */

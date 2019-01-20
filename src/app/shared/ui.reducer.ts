@@ -1,7 +1,6 @@
 import {
     UIActions, /* Is an exported type which contains classes */
-    START_LOADING, /* is an exported string constant */
-    STOP_LOADING
+    ActionTypes
 } from './ui.actions';
 
 /* This state is loaded in App Reducer & createFeatureSelector */
@@ -10,17 +9,17 @@ export interface State {
 }
 
 const initialState: State = {
-  isLoading: false
+    isLoading: false
 };
 
 /* Actual reducer which modifies the state */
-export function uiReducer(state=initialState, action: UIActions) {
+export function uiReducer(state = initialState, action: UIActions) {
     console.log(action.type);
-    switch(action.type){
-        case START_LOADING: {
+    switch (action.type) {
+        case ActionTypes.StartLoading: {
             return { isLoading: true };
         }
-        case STOP_LOADING: {
+        case ActionTypes.StopLoading: {
             return { isLoading: false };
         }
     }
