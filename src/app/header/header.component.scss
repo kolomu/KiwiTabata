@@ -1,0 +1,19 @@
+@import '../../vars';
+
+a {
+    text-decoration: none;
+    color: white;
+    &:hover,
+    &.active {
+        color: lightgray;
+    }
+}
+
+mat-toolbar-row {
+    max-width: $max-width;
+    margin: 0 auto;
+}
+
+.navigation-link {
+    list-style: none;
+}

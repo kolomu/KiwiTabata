@@ -1,1 +1,15 @@
-<button mat-raised-button (click)="onOpenSidenav()">Click me!</button>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-icon-button (click)="onOpenSidenav()" fxHide fxShow.lt-sm>
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <span class="app-title">Kiwi Tabata</span>
+
+        <nav fxFlex fxLayoutAlign="flex-end" fxHide fxShow.gt-xs>
+        <ul fxLayout="row" fxLayoutGap="1rem">
+            <li *ngFor="let link of links" class="navigation-link"><a href="#">{{link.name}}</a></li>
+        </ul>
+        </nav>
+    </mat-toolbar-row>
+</mat-toolbar>

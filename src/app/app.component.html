@@ -1,5 +1,3 @@
-isLoading: {{ isLoading$ | async}}
-
 <mat-sidenav-container>
   <mat-sidenav #sidenav role="navigation">
     <app-sidenav (closeSidenav)="sidenav.close()" [links]="links"></app-sidenav>
@@ -8,6 +6,7 @@ isLoading: {{ isLoading$ | async}}
     <app-header (openSidenav)="sidenav.toggle()" [links]="links"></app-header>
     <main>
       <h1>Demo</h1>
+      isLoading: {{ isLoading$ | async}}
       <router-outlet></router-outlet>  
     </main>
   </mat-sidenav-content>
