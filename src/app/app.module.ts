@@ -12,13 +12,15 @@ import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './header/sidenav/sidenav.component';
 
 import { reducers } from './app.reducers';
+import { StartComponent } from './start/start.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    SidenavComponent
+    SidenavComponent,
+    StartComponent
   ],
   imports: [
     BrowserModule,

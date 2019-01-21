@@ -5,7 +5,6 @@
   <mat-sidenav-content>
     <app-header (openSidenav)="sidenav.toggle()" [links]="links"></app-header>
     <main>
-      <h1>Demo</h1>
       isLoading: {{ isLoading$ | async}}
       <router-outlet></router-outlet>  
     </main>
