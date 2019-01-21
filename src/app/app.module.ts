@@ -13,6 +13,7 @@ import { SidenavComponent } from './header/sidenav/sidenav.component';
 
 import { reducers } from './app.reducers';
 import { StartComponent } from './start/start.component';
+import { TimerComponent } from './timer/timer.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { StartComponent } from './start/start.component';
     AppComponent,
     HeaderComponent,
     SidenavComponent,
-    StartComponent
+    StartComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,
