@@ -2,8 +2,29 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-countdown',
-  template: `<div class="countdown">{{getRemainingTime()}}</div>`,
-  styles: [``]
+  template: `<div class="countdown">
+      <div class="time mat-display-4">
+        {{getRemainingTime()}}
+      </div>
+    </div>`,
+  styles: [`
+  .countdown {
+    position: absolute;
+    top: 64px;
+    left: 0px;
+    height: calc(100% - 64px);
+    width: 100%;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    text-align: center;
+    display: flex;
+    align-items: center;
+  }
+
+  .time {
+    width: 100%;
+  }
+  `]
 })
 export class CountdownComponent implements OnInit {
   @Input() value: number;
