@@ -1,4 +1,5 @@
-<app-countdown [value]="getGetReadyTime()" (finish)="onFinish()" *ngIf="isFirstRound && onStartTimer"></app-countdown>
+<app-countdown [value]="getGetReadyTime()" (finish)="onFinish($event)" 
+  *ngIf="shouldShowCountdown()"></app-countdown>
 
 <!-- WORKOUT TIMER -->
 <circle-progress *ngIf="!isFirstRound && !isPause"

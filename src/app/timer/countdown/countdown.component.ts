@@ -3,8 +3,11 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-countdown',
   template: `<div class="countdown">
+  <div class="wrapper">    
       <div class="time mat-display-4">
         {{getRemainingTime()}}
+      </div>
+        <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancel</button>
       </div>
     </div>`,
   styles: [`
@@ -21,7 +24,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
     align-items: center;
   }
 
-  .time {
+  .wrapper {
     width: 100%;
   }
   `]
@@ -60,4 +63,7 @@ export class CountdownComponent implements OnInit {
     return (this.seconds - this.elapsedTime);
   }
 
+  onCancel() {
+    this.finish.emit(false);
+  }
 }

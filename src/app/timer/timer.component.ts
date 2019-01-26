@@ -9,12 +9,13 @@ export class TimerComponent implements OnInit {
   private rounds = 8;
   private intervalTime = 20;
   private pauseIntervalTime = 10;
-  private getReadyTime = 10;
+  private getReadyTime = 100;
 
   private progress = 0;
   private currentRound = 1;
   isPause = false;
   isFirstRound = true;
+  isCountdownCancelled = false;
 
   onStartTimer = false;
   intervalId = null;
@@ -25,18 +26,25 @@ export class TimerComponent implements OnInit {
     this.isPause = false;
     this.currentRound = 1;
     this.progress = 0;
+    this.isCountdownCancelled = false;
   }
 
   constructor() { }
 
   startTimer() {
+    this.initTimer();
     this.onStartTimer = true;
   }
 
-  onFinish() {
-    console.log('called onFinish()');
-    this.isFirstRound = false;
-    this._startRound(this.intervalTime);
+  onFinish(isSuccessfullyCounted) {
+    if (isSuccessfullyCounted) {
+      this.isFirstRound = false;
+      this._startRound(this.intervalTime);
+    } else {
+      this.isCountdownCancelled = true;
+    }
+
+
   }
 
   private _startRound(intervalTime: number) {
@@ -93,5 +101,9 @@ export class TimerComponent implements OnInit {
 
   getGetReadyTime() {
     return this.getReadyTime;
+  }
+
+  shouldShowCountdown(): boolean {
+    return !this.isCountdownCancelled && this.isFirstRound && this.onStartTimer
   }
 }
