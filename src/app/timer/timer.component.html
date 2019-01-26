@@ -1,6 +1,15 @@
-<p>
-  timer works!
-</p>
-<mat-spinner></mat-spinner>
+<app-countdown [value]="getGetReadyTime()" (finish)="onFinish()" *ngIf="isFirstRound && onStartTimer"></app-countdown>
 
-<button (click)="startRound()">Start</button>
+<circle-progress *ngIf="!isFirstRound"
+  [percent]="getProgressValue()"
+  [radius]="100"
+  [outerStrokeWidth]="16"
+  [innerStrokeWidth]="0"
+  [outerStrokeColor]="'#78C000'"
+  [innerStrokeColor]="'#C7E596'"
+  [animation]="false"
+  [renderOnClick]="false"
+  [subtitle]="getCurrentRound() + '/' + getRounds()"
+></circle-progress>
+
+<button *ngIf="isFirstRound" (click)="startTimer()">Start</button>
