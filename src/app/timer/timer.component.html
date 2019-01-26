@@ -1,12 +1,24 @@
 <app-countdown [value]="getGetReadyTime()" (finish)="onFinish()" *ngIf="isFirstRound && onStartTimer"></app-countdown>
 
-<circle-progress *ngIf="!isFirstRound"
+<!-- WORKOUT TIMER -->
+<circle-progress *ngIf="!isFirstRound && !isPause"
   [percent]="getProgressValue()"
   [radius]="100"
   [outerStrokeWidth]="16"
   [innerStrokeWidth]="0"
-  [outerStrokeColor]="'#78C000'"
-  [innerStrokeColor]="'#C7E596'"
+  [outerStrokeColor]="'#d35400'"
+  [animation]="false"
+  [renderOnClick]="false"
+  [subtitle]="getCurrentRound() + '/' + getRounds()"
+></circle-progress>
+
+<!-- PAUSE TIMER -->
+<circle-progress *ngIf="!isFirstRound && isPause"
+  [percent]="getProgressValue()"
+  [radius]="100"
+  [outerStrokeWidth]="16"
+  [innerStrokeWidth]="0"
+  [outerStrokeColor]="'#2ecc71'"
   [animation]="false"
   [renderOnClick]="false"
   [subtitle]="getCurrentRound() + '/' + getRounds()"
