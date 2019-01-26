@@ -17,6 +17,7 @@ import { reducers } from './app.reducers';
 import { StartComponent } from './start/start.component';
 import { TimerComponent } from './timer/timer.component';
 import { CountdownComponent } from './timer/countdown/countdown.component';
+import { MinuteSecondsPipe } from './shared/minute-seconds.pipe';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { CountdownComponent } from './timer/countdown/countdown.component';
     SidenavComponent,
     StartComponent,
     TimerComponent,
-    CountdownComponent
+    CountdownComponent,
+    MinuteSecondsPipe
   ],
   imports: [
     BrowserModule,
