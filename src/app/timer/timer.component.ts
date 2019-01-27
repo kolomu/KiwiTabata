@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SoundService } from './sound.service';
+import { AudioService } from './audio.service';
 
 @Component({
   selector: 'app-timer',
@@ -8,9 +8,9 @@ import { SoundService } from './sound.service';
 })
 export class TimerComponent implements OnInit {
   private rounds = 8;
-  private intervalTime = 20;
-  private pauseIntervalTime = 10;
-  private getReadyTime = 10;
+  private intervalTime = 5;
+  private pauseIntervalTime = 2;
+  private getReadyTime = 5;
 
   private progress = 0;
   private currentRound = 1;
@@ -21,7 +21,7 @@ export class TimerComponent implements OnInit {
   onStartTimer = false;
   intervalId = null;
 
-  constructor(private soundService: SoundService) { }
+  constructor(private audioService: AudioService) { }
 
   ngOnInit() { }
 
@@ -75,28 +75,33 @@ export class TimerComponent implements OnInit {
         this.isPause = false;
         this._startRound(this.intervalTime);
         this.currentRound = this.currentRound + 1;
+        // is it final round?
+        if (this.currentRound === this.getRounds()) {
+          this.audioService.playFinalRound();
+        } else {
+          this.audioService.playRound(this.currentRound);
+        }
       } else {
+        this.audioService.playFinish();
         console.log('finish :-)');
       }
     } else {
       // starte eine Pause-Runde
       this.isPause = true;
+      this.audioService.playPause();
       this._startRound(this.pauseIntervalTime);
     }
 
   }
 
-  // TODO: better way to call inidividual methods
-  // why does this not work?
-  // `this.soundService.play${seconds}();`
   announceRemainingSeconds(seconds: number) {
     console.log('announceRemainingSeconds' + seconds);
-    if (seconds <= 10 && seconds >= 0) {
-      this.soundService.play(seconds);
+    if (seconds <= 10 && seconds > 0) {
+      this.audioService.play(seconds);
     }
 
-    if(seconds === 0) {
-      this.soundService.playGo();
+    if (seconds === 0) {
+      this.audioService.playStart();
     }
   }
 
