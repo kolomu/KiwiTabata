@@ -1,31 +1,54 @@
-<app-countdown 
-  [value]="getGetReadyTime()" 
-  (secondsRemaining)="announceRemainingSeconds($event)" 
-  (finish)="onFinish($event)" 
-  *ngIf="shouldShowCountdown()"></app-countdown>
+<div class="timer">
 
-<!-- WORKOUT TIMER -->
-<circle-progress *ngIf="!isFirstRound && !isPause"
-  [percent]="getProgressValue()"
-  [radius]="100"
-  [outerStrokeWidth]="16"
-  [innerStrokeWidth]="0"
-  [outerStrokeColor]="'#d35400'"
-  [animation]="false"
-  [renderOnClick]="false"
-  [subtitle]="getCurrentRound() + '/' + getRounds()"
-></circle-progress>
+  <app-countdown 
+    [value]="getGetReadyTime()" 
+    (secondsRemaining)="announceRemainingSeconds($event)" 
+    (finish)="onFinish($event)" 
+    *ngIf="shouldShowCountdown()"></app-countdown>
 
-<!-- PAUSE TIMER -->
-<circle-progress *ngIf="!isFirstRound && isPause"
-  [percent]="getProgressValue()"
-  [radius]="100"
-  [outerStrokeWidth]="16"
-  [innerStrokeWidth]="0"
-  [outerStrokeColor]="'#2ecc71'"
-  [animation]="false"
-  [renderOnClick]="false"
-  [subtitle]="getCurrentRound() + '/' + getRounds()"
-></circle-progress>
+  <div class="wrapper">
+    <!-- WORKOUT TIMER -->
+    <circle-progress *ngIf="!isFirstRound && !isPause"
+      [percent]="getProgressValue()"
+      [radius]="100"
+      [outerStrokeWidth]="16"
+      [innerStrokeWidth]="0"
+      [outerStrokeColor]="'#f1c40f'"
+      [unitsColor]="'#f1c40f'"
+      [titleColor]="'#f1c40f'"
+      [subtitleColor]="'#ecf0f1'"
+      [titleFontSize]="'3.5rem'"
+      [unitsFontSize]="'3.5rem'"
+      [subtitleFontSize]="'2.5rem'"
+      [animation]="false"
+      [renderOnClick]="false"
+      [subtitle]="getCurrentRound() + '/' + getRounds()"
+      [class]="'workout-circle'"
+      [responsive]="true"
+    ></circle-progress>
 
+    <!-- PAUSE TIMER -->
+    <circle-progress *ngIf="!isFirstRound && isPause"
+      [percent]="getProgressValue()"
+      [radius]="100"
+      [outerStrokeWidth]="16"
+      [innerStrokeWidth]="0"
+      [outerStrokeColor]="'#2ecc71'"
+      [unitsColor]="'#2ecc71'"
+      [titleColor]="'#2ecc71'"
+      [subtitleColor]="'#ecf0f1'"
+      [titleFontSize]="'3.5rem'"
+      [unitsFontSize]="'3.5rem'"
+      [subtitleFontSize]="'2.5rem'"
+      [animation]="false"
+      [renderOnClick]="false"
+      [subtitle]="getCurrentRound() + '/' + getRounds()"
+      [class]="'pause-circle'"
+      [responsive]="true"
+    ></circle-progress>
+  </div>
+
+  <!-- TODO: Formular Component for Settings  + StartButton to trigger this component -->
 <button *ngIf="isFirstRound" (click)="startTimer()">Start</button>
+</div>
+
