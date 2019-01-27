@@ -10,7 +10,7 @@ export class TimerComponent implements OnInit {
   private rounds = 8;
   private intervalTime = 20;
   private pauseIntervalTime = 10;
-  private getReadyTime = 10;
+  private getReadyTime = 1;
 
   private progress = 0;
   private currentRound = 1;
@@ -95,7 +95,6 @@ export class TimerComponent implements OnInit {
   }
 
   announceRemainingSeconds(seconds: number) {
-    console.log('announceRemainingSeconds' + seconds);
     if (seconds <= 10 && seconds > 0) {
       this.audioService.play(seconds);
     }

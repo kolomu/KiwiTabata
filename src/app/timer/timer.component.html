@@ -46,6 +46,12 @@
       [class]="'pause-circle'"
       [responsive]="true"
     ></circle-progress>
+
+    <div class="control-buttons" fxLayout fxLayoutAlign="center center" fxLayoutGap="1rem" *ngIf="!isFirstRound">
+      <button mat-raised-button color="accent" type="button">Pause</button>
+      <button mat-raised-button color="warn" type="button">Cancel</button>
+      <button mat-raised-button color="primary" type="button">Finish</button>
+    </div>
   </div>
 
   <!-- TODO: Formular Component for Settings  + StartButton to trigger this component -->
