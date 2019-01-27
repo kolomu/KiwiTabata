@@ -32,6 +32,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 export class CountdownComponent implements OnInit {
   @Input() value: number;
   @Output() finish = new EventEmitter<boolean>();
+  @Output() secondsRemaining = new EventEmitter<number>();
 
   intervalId = null;
   elapsedTime = 0;
@@ -40,18 +41,24 @@ export class CountdownComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.seconds =this.value
-    this.startCountdown(this.seconds)
+    this.seconds = this.value;
+    this.startCountdown(this.seconds);
   }
 
   startCountdown(seconds: number) {
+    // emit the first value
+    this.secondsRemaining.emit(this.getRemainingTime());
+
     this.intervalId = setInterval(() => {
-      if (this.elapsedTime >= seconds) {
+      // display the timer rightaway without showing 0
+      if (this.elapsedTime + 1 >= seconds) {
+        this.secondsRemaining.emit(0);
         clearInterval(this.intervalId);
         this.intervalId = null;
         this.finish.emit(true);
       } else {
         this.elapsedTime += 1;
+        this.secondsRemaining.emit(this.getRemainingTime());
       }
     }, 1000);
   }

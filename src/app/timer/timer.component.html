@@ -1,4 +1,7 @@
-<app-countdown [value]="getGetReadyTime()" (finish)="onFinish($event)" 
+<app-countdown 
+  [value]="getGetReadyTime()" 
+  (secondsRemaining)="announceRemainingSeconds($event)" 
+  (finish)="onFinish($event)" 
   *ngIf="shouldShowCountdown()"></app-countdown>
 
 <!-- WORKOUT TIMER -->

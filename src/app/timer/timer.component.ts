@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SoundService } from './sound.service';
 
 @Component({
   selector: 'app-timer',
@@ -9,7 +10,7 @@ export class TimerComponent implements OnInit {
   private rounds = 8;
   private intervalTime = 20;
   private pauseIntervalTime = 10;
-  private getReadyTime = 100;
+  private getReadyTime = 10;
 
   private progress = 0;
   private currentRound = 1;
@@ -20,6 +21,10 @@ export class TimerComponent implements OnInit {
   onStartTimer = false;
   intervalId = null;
 
+  constructor(private soundService: SoundService) { }
+
+  ngOnInit() { }
+
   // always when the start button is clicked reset the values
   initTimer() {
     this.isFirstRound = true;
@@ -28,8 +33,6 @@ export class TimerComponent implements OnInit {
     this.progress = 0;
     this.isCountdownCancelled = false;
   }
-
-  constructor() { }
 
   startTimer() {
     this.initTimer();
@@ -43,8 +46,6 @@ export class TimerComponent implements OnInit {
     } else {
       this.isCountdownCancelled = true;
     }
-
-
   }
 
   private _startRound(intervalTime: number) {
@@ -85,7 +86,59 @@ export class TimerComponent implements OnInit {
 
   }
 
-  ngOnInit() { }
+  // TODO: better way to call inidividual methods
+  // why does this not work?
+  // `this.soundService.play${seconds}();`
+  announceRemainingSeconds(seconds: number) {
+    console.log('announceRemainingSeconds' + seconds);
+    if (seconds <= 10) {
+      switch(seconds) {
+        case 10: {
+          this.soundService.play10();
+          break;
+        }
+        case 9: {
+          this.soundService.play9();
+          break;
+        }
+        case 8: {
+          this.soundService.play8();
+          break;
+        }
+        case 7: {
+          this.soundService.play7();
+          break;
+        }
+        case 6: {
+          this.soundService.play6();
+          break;
+        }
+        case 5: {
+          this.soundService.play5();
+          break;
+        }
+        case 4: {
+          this.soundService.play4();
+          break;
+        }
+        case 3: {
+          this.soundService.play3();
+          break;
+        }
+        case 2: {
+          this.soundService.play2();
+          break;
+        }
+        case 1: {
+          this.soundService.play1();
+          break;
+        }
+        case 0: {
+          this.soundService.playGo();
+        }
+      }
+    }
+  }
 
   getProgressValue() {
     return this.progress;
