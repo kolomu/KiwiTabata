@@ -8,9 +8,9 @@ import { AudioService } from './audio.service';
 })
 export class TimerComponent implements OnInit {
   private rounds = 8;
-  private intervalTime = 5;
-  private pauseIntervalTime = 2;
-  private getReadyTime = 5;
+  private intervalTime = 20;
+  private pauseIntervalTime = 10;
+  private getReadyTime = 10;
 
   private progress = 0;
   private currentRound = 1;
@@ -101,7 +101,7 @@ export class TimerComponent implements OnInit {
     }
 
     if (seconds === 0) {
-      this.audioService.playStart();
+      this.audioService.playAirhorn();
     }
   }
 
