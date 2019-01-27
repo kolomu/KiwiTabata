@@ -15,7 +15,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
     position: absolute;
     top: 64px;
     left: 0px;
-    height: calc(100% - 64px);
+    height: calc(80% - 64px); /* TODO: better way to vertically center this item */
     width: 100%;
     background-color: #2c3e50;
     color: #ecf0f1;
