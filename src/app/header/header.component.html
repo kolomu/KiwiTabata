@@ -7,9 +7,7 @@
         <span class="app-title">Kiwi Tabata</span>
 
         <nav fxFlex fxLayoutAlign="flex-end" fxHide fxShow.gt-xs>
-        <ul fxLayout="row" fxLayoutGap="1rem">
-            <li *ngFor="let link of links" class="navigation-link"><a href="#">{{link.name}}</a></li>
-        </ul>
+        <button class="nav-button" mat-button fxFlex="1" *ngFor="let link of links" type="button" [routerLink]="link.href">{{link.name}}</button>
         </nav>
     </mat-toolbar-row>
 </mat-toolbar>
