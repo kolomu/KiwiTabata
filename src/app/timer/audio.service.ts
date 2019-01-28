@@ -23,6 +23,10 @@ export class AudioService {
   }
 
   playPause() {
+    new Audio(`assets/sounds/pause.ogg`).play();
+  }
+
+  playBreak() {
     new Audio(`assets/sounds/chinese-gong.mp3`).play();
   }
 
