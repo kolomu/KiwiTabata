@@ -9,17 +9,18 @@ import { AudioService } from './audio.service';
 export class TimerComponent implements OnInit {
   private rounds = 8;
   private intervalTime = 20;
-  private pauseIntervalTime = 10;
+  private breakIntervalTime = 10;
   private getReadyTime = 1;
 
   private progress = 0;
   private currentRound = 1;
-  isPause = false;
+  isBreak = false;
   isFirstRound = true;
   isCountdownCancelled = false;
 
   onStartTimer = false;
   intervalId = null;
+  isPause = false;
 
   constructor(private audioService: AudioService) { }
 
@@ -28,10 +29,26 @@ export class TimerComponent implements OnInit {
   // always when the start button is clicked reset the values
   initTimer() {
     this.isFirstRound = true;
-    this.isPause = false;
+    this.isBreak = false;
     this.currentRound = 1;
     this.progress = 0;
     this.isCountdownCancelled = false;
+    this.isPause = false;
+  }
+
+  // reset to default view
+  reset() {
+    this.isFirstRound = true;
+    this.isBreak = false;
+    this.currentRound = 0;
+    this.progress = 0;
+    this.isCountdownCancelled = true;
+    this.isPause = false;
+
+    if(this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+
   }
 
   startTimer() {
@@ -39,7 +56,7 @@ export class TimerComponent implements OnInit {
     this.onStartTimer = true;
   }
 
-  onFinish(isSuccessfullyCounted) {
+  onCountdownComplete(isSuccessfullyCounted) {
     if (isSuccessfullyCounted) {
       this.isFirstRound = false;
       this._startRound(this.intervalTime);
@@ -57,11 +74,13 @@ export class TimerComponent implements OnInit {
     this.progress = 0;
     const step = (intervalTime / 100) * 1000;
     this.intervalId = setInterval(() => {
-      if (this.progress >= 100) {
-        this.progress = 100;
-        return this.roundFinished();
+      if (!this.isPause) {
+        if (this.progress >= 100) {
+          this.progress = 100;
+          return this.roundFinished();
+        }
+        this.progress = this.progress + 1;
       }
-      this.progress = this.progress + 1;
     }, step);
   }
 
@@ -69,10 +88,10 @@ export class TimerComponent implements OnInit {
     // resetting stuff...
     clearInterval(this.intervalId);
 
-    if (this.isPause) {
+    if (this.isBreak) {
       if (this.currentRound < this.rounds) {
         // starte eine Fitness-Runde
-        this.isPause = false;
+        this.isBreak = false;
         this._startRound(this.intervalTime);
         this.currentRound = this.currentRound + 1;
         // is it final round?
@@ -83,13 +102,12 @@ export class TimerComponent implements OnInit {
         }
       } else {
         this.audioService.playFinish();
-        console.log('finish :-)');
       }
     } else {
-      // starte eine Pause-Runde
-      this.isPause = true;
-      this.audioService.playPause();
-      this._startRound(this.pauseIntervalTime);
+      // starte eine Break-Runde
+      this.isBreak = true;
+      this.audioService.playBreak();
+      this._startRound(this.breakIntervalTime);
     }
 
   }
@@ -102,6 +120,26 @@ export class TimerComponent implements OnInit {
     if (seconds === 0) {
       this.audioService.playAirhorn();
     }
+  }
+
+  onPause() {
+    this.isPause = true;
+    this.audioService.playPause();
+  }
+
+  onContinue() {
+    this.isPause = false;
+    this.audioService.playAirhorn();
+  }
+  
+  onCancel() {
+    this.reset();
+  }
+
+  onFinish() {
+    // TODO: SAVE THE WORKOUT
+    this.audioService.playFinish();
+    this.reset();
   }
 
   getProgressValue() {
