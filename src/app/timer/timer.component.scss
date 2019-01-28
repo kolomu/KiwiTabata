@@ -16,3 +16,17 @@
     width: 100%;
     height: calc(80% - 64px);
 }
+
+.control-buttons {
+    margin-top: -2rem;
+}
+
+@media (max-width: 599px) {
+    .timer {
+        top: 56px;
+        height: calc(100% - 56px);
+    }
+    .wrapper {
+        height: calc(100% - 56px);
+    }
+}

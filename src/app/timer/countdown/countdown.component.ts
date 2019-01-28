@@ -27,6 +27,13 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
   .wrapper {
     width: 100%;
   }
+
+  @media (max-width: 599px) {
+    .countdown {
+      top: 56px;
+      height: calc(80% - 56px);
+    }
+  }
   `]
 })
 export class CountdownComponent implements OnInit {
