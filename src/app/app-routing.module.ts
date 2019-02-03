@@ -4,9 +4,12 @@ import { TimerComponent } from './timer/timer.component';
 import { StartComponent } from './start/start.component';
 import { CountdownComponent } from './countdown/countdown.component';
 
+import { TrainingGuard } from './timer/training.guard';
+import { CountdownGuard } from './countdown/countdown.guard';
+
 const routes: Routes = [
-  { path: 'training-start', component: CountdownComponent},
-  { path: 'tabata-timer', component: TimerComponent },
+  { path: 'training-start', component: CountdownComponent, canActivate: [CountdownGuard]},
+  { path: 'tabata-timer', component: TimerComponent, canActivate: [TrainingGuard]},
   { path: '', component: StartComponent }
 ];
 

@@ -11,6 +11,10 @@ export interface TimerSettings {
   providedIn: 'root'
 })
 export class TrainingService {
+
+  isManuallyStarted = false;
+  isCountdownFinished = false;
+
   timerSettings: TimerSettings = {
     rounds: 8,
     intervalTime: 20,

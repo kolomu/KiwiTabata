@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TrainingService } from '../training.service';
 import { Router } from '@angular/router';
 
-// TODO: Fix styling
 @Component({
   selector: 'app-countdown',
   templateUrl: './countdown.component.html',
@@ -12,7 +11,6 @@ export class CountdownComponent implements OnInit {
   intervalId = null;
   elapsedTime = 0;
   seconds = null;
-
 
   constructor(private trainingService: TrainingService, private router: Router) { }
 
@@ -27,6 +25,8 @@ export class CountdownComponent implements OnInit {
       if (this.elapsedTime + 1 >= seconds) {
         clearInterval(this.intervalId);
         this.intervalId = null;
+        this.trainingService.isManuallyStarted = false;
+        this.trainingService.isCountdownFinished = true;
         this.router.navigate(['/tabata-timer'])
       } else {
         this.elapsedTime += 1;
@@ -43,6 +43,8 @@ export class CountdownComponent implements OnInit {
 
   onCancel() {
     clearInterval(this.intervalId);
+    this.trainingService.isManuallyStarted = false;
+    this.trainingService.isCountdownFinished = false;
     this.router.navigate(['/']);
   }
 }

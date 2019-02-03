@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { TimerComponent } from './timer/timer.component';
 import { CountdownComponent } from './countdown/countdown.component';
 import { StartComponent } from './start/start.component';
+import { TrainingGuard } from './timer/training.guard';
+import { CountdownGuard } from './countdown/countdown.guard';
 
 
 @NgModule({
@@ -32,7 +34,7 @@ import { StartComponent } from './start/start.component';
     NgCircleProgressModule.forRoot(),
     FormsModule
   ],
-  providers: [],
+  providers: [TrainingGuard, CountdownGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
