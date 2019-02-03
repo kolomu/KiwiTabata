@@ -19,10 +19,13 @@ export class TrainingService {
   };
 
   setTimerSettings(ts: TimerSettings) {
-    this.timerSettings = { ...this.timerSettings, ...ts };
+    this.timerSettings.rounds = ts.rounds || this.timerSettings.rounds;
+    this.timerSettings.intervalTime = ts.intervalTime || this.timerSettings.intervalTime;
+    this.timerSettings.breakIntervalTime = ts.breakIntervalTime || this.timerSettings.breakIntervalTime;
+    this.timerSettings.getReadyTime = ts.getReadyTime || this.timerSettings.getReadyTime;
   }
 
   getTimerSettings(): TimerSettings {
-    return { ...this.getTimerSettings };
+    return { ...this.timerSettings };
   }
 }
