@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
-import { StoreModule } from '@ngrx/store';
 
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
@@ -12,7 +11,6 @@ import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
 
-import { reducers } from './app.reducers';
 import { TimerComponent } from './timer/timer.component';
 import { CountdownComponent } from './countdown/countdown.component';
 import { StartComponent } from './start/start.component';
@@ -30,7 +28,6 @@ import { StartComponent } from './start/start.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    StoreModule.forRoot(reducers),
     FlexLayoutModule,
     NgCircleProgressModule.forRoot(),
     FormsModule
