@@ -22,7 +22,7 @@ export class TrainingService {
     this.timerSettings = { ...this.timerSettings, ...ts };
   }
 
-  getTimerSettings() {
+  getTimerSettings(): TimerSettings {
     return { ...this.getTimerSettings };
   }
 }
