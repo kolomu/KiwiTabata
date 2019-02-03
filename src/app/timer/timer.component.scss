@@ -1,32 +1,17 @@
+form {
+    color: #ecf0f1;
+}
+
 .timer {
-    position: absolute;
-    top: 64px;
-    left: 0px;
-    height: calc(100% - 64px);
-    width: 100%;
     background-color: #2c3e50;
     color: #ecf0f1;
     text-align: center;
     display: flex;
     align-items: center;
     font-family: 'Roboto', sans-serif;
+    height: 100%;
 }
 
 .wrapper {
-    width: 100%;
-    height: calc(80% - 64px);
-}
-
-.control-buttons {
-    margin-top: -2rem;
-}
-
-@media (max-width: 599px) {
-    .timer {
-        top: 56px;
-        height: calc(100% - 56px);
-    }
-    .wrapper {
-        height: calc(100% - 56px);
-    }
+    margin-top: -5rem;
 }
