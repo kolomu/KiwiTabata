@@ -10,6 +10,11 @@ import { TrainingService, TimerSettings } from '../training.service';
 })
 export class StartComponent {
 
+  intervalTime: number;
+  breakIntervalTime: number;
+  getReadyTime: number;
+  rounds: number;
+
   constructor(private router: Router, private trainingService: TrainingService) { }
 
   start(form: NgForm) {
