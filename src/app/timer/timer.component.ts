@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AudioService } from './audio.service';
+import { TrainingService } from '../training.service';
 
 @Component({
   selector: 'app-timer',
@@ -7,10 +8,10 @@ import { AudioService } from './audio.service';
   styleUrls: ['./timer.component.scss']
 })
 export class TimerComponent implements OnInit {
-  private rounds = 8;
-  private intervalTime = 20;
-  private breakIntervalTime = 10;
-  private getReadyTime = 1;
+  rounds: number;
+  intervalTime: number;
+  breakIntervalTime: number;
+  getReadyTime: number;
 
   private progress = 0;
   private currentRound = 1;
@@ -22,9 +23,16 @@ export class TimerComponent implements OnInit {
   intervalId = null;
   isPause = false;
 
-  constructor(private audioService: AudioService) { }
+  constructor(private audioService: AudioService, private trainingService: TrainingService) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    const timerSettings = this.trainingService.getTimerSettings();
+    this.rounds = timerSettings.rounds;
+    this.intervalTime = timerSettings.intervalTime;
+    this.breakIntervalTime = timerSettings.breakIntervalTime;
+    this.getReadyTime = timerSettings.getReadyTime;
+    this.initTimer();
+  }
 
   // always when the start button is clicked reset the values
   initTimer() {
@@ -137,7 +145,6 @@ export class TimerComponent implements OnInit {
   }
 
   onFinish() {
-    // TODO: SAVE THE WORKOUT
     this.audioService.playFinish();
     this.reset();
   }
