@@ -5,30 +5,8 @@ import { Router } from '@angular/router';
 // TODO: Fix styling
 @Component({
   selector: 'app-countdown',
-  template: `<div class="countdown">
-  <div class="wrapper">    
-      <div class="time mat-display-4">
-        {{getRemainingTime()}}
-      </div>
-        <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancel</button>
-      </div>
-    </div>`,
-  styles: [`
-  .countdown {
-    width: 100%;
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    text-align: center;
-    display: flex;
-    align-items: center;
-  }
-
-  .wrapper {
-    width: 100%;
-    height: 100%;
-  }
-
-  `]
+  templateUrl: './countdown.component.html',
+  styleUrls: ['./countdown.component.scss']
 })
 export class CountdownComponent implements OnInit {
   intervalId = null;
@@ -64,6 +42,7 @@ export class CountdownComponent implements OnInit {
   }
 
   onCancel() {
+    clearInterval(this.intervalId);
     this.router.navigate(['/']);
   }
 }
