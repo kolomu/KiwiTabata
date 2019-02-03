@@ -1,5 +1,8 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TrainingService } from '../training.service';
+import { Router } from '@angular/router';
 
+// TODO: Fix styling
 @Component({
   selector: 'app-countdown',
   template: `<div class="countdown">
@@ -12,10 +15,6 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
     </div>`,
   styles: [`
   .countdown {
-    position: absolute;
-    top: 64px;
-    left: 0px;
-    height: calc(80% - 64px); /* TODO: better way to vertically center this item */
     width: 100%;
     background-color: #2c3e50;
     color: #ecf0f1;
@@ -26,46 +25,33 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 
   .wrapper {
     width: 100%;
+    height: 100%;
   }
 
-  @media (max-width: 599px) {
-    .countdown {
-      top: 56px;
-      height: calc(80% - 56px);
-    }
-  }
   `]
 })
 export class CountdownComponent implements OnInit {
-  @Input() value: number;
-  @Output() finish = new EventEmitter<boolean>();
-  @Output() secondsRemaining = new EventEmitter<number>();
-
   intervalId = null;
   elapsedTime = 0;
   seconds = null;
 
-  constructor() { }
+
+  constructor(private trainingService: TrainingService, private router: Router) { }
 
   ngOnInit() {
-    this.seconds = this.value;
+    this.seconds = this.trainingService.getTimerSettings().getReadyTime;
     this.startCountdown(this.seconds);
   }
 
   startCountdown(seconds: number) {
-    // emit the first value
-    this.secondsRemaining.emit(this.getRemainingTime());
-
     this.intervalId = setInterval(() => {
       // display the timer rightaway without showing 0
       if (this.elapsedTime + 1 >= seconds) {
-        this.secondsRemaining.emit(0);
         clearInterval(this.intervalId);
         this.intervalId = null;
-        this.finish.emit(true);
+        this.router.navigate(['/tabata-timer'])
       } else {
         this.elapsedTime += 1;
-        this.secondsRemaining.emit(this.getRemainingTime());
       }
     }, 1000);
   }
@@ -78,6 +64,6 @@ export class CountdownComponent implements OnInit {
   }
 
   onCancel() {
-    this.finish.emit(false);
+    this.router.navigate(['/']);
   }
 }
