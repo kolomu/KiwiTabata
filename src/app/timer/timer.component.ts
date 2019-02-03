@@ -57,8 +57,8 @@ export class TimerComponent implements OnInit {
 
   startTimer() {
     this.initTimer();
-    this._startRound(this.intervalTime);
     this.audioService.playAirhorn();
+    this._startRound(this.intervalTime);
   }
 
   private _startRound(intervalTime: number) {
@@ -129,6 +129,7 @@ export class TimerComponent implements OnInit {
   }
 
   onCancel() {
+    clearInterval(this.intervalId);
     this.router.navigate(['/']);
   }
 
