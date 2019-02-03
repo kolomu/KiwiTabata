@@ -1,4 +1,4 @@
-<div class="timer">
+<div class="timer" fxLayout fxLayoutAlign="center center">
 
   <app-countdown 
     [value]="getGetReadyTime()" 
@@ -49,11 +49,8 @@
       <button mat-raised-button color="accent" type="button" (click)="onPause()" *ngIf="!isPause">Pause</button>
       <button mat-raised-button color="primary" type="button" (click)="onContinue()" *ngIf="isPause">Continue</button>
       <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancel</button>
-      <button mat-raised-button type="button" (click)="onFinish()">Finish</button>
     </div>
   </div>
 
-  <!-- TODO: Formular Component for Settings  + StartButton to trigger this component -->
-<button *ngIf="isFirstRound" (click)="startTimer()">Start</button>
 </div>
 
