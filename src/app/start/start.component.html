@@ -1,0 +1,33 @@
+<div class="wrapper">
+  <form (ngSubmit)="start(f)" #f="ngForm" fxLayout="column" fxLayoutGap="2rem">
+    <mat-form-field color="accent" [floatLabel]="'always'">
+      <mat-label>Workout Time</mat-label>
+      <input matInput placeholder="20" name="intervalTime" [ngModel]="intervalTime">
+      <mat-icon matSuffix>fitness_center</mat-icon>
+      <mat-hint>Workout Time (for each round) in seconds</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field color="accent" [floatLabel]="'always'">
+      <mat-label>Break Time</mat-label>
+      <input matInput placeholder="10" name="breakIntervalTime" [ngModel]="breakIntervalTime">
+      <mat-icon matSuffix>pause_circle_outline</mat-icon>
+      <mat-hint>Break Time (for each round) in seconds</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field color="accent" [floatLabel]="'always'">
+      <mat-label>Get Ready Time</mat-label>
+      <input matInput placeholder="5" name="getReadyTime" [ngModel]="getReadyTime">
+      <mat-icon matSuffix>timer</mat-icon>
+      <mat-hint>Time before starting first round</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field color="accent" [floatLabel]="'always'">
+      <mat-label>Rounds</mat-label>
+      <input matInput placeholder="8" name="rounds" [ngModel]="rounds">
+      <mat-icon matSuffix>play_circle_filled</mat-icon>
+      <mat-hint>Amount of rounds</mat-hint>
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button>Start</button>
+  </form>
+</div>

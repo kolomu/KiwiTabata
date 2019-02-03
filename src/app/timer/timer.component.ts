@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AudioService } from './audio.service';
+import { TrainingService } from '../training.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-timer',
@@ -7,45 +9,47 @@ import { AudioService } from './audio.service';
   styleUrls: ['./timer.component.scss']
 })
 export class TimerComponent implements OnInit {
-  private rounds = 8;
-  private intervalTime = 20;
-  private breakIntervalTime = 10;
-  private getReadyTime = 1;
+  rounds: number;
+  intervalTime: number;
+  breakIntervalTime: number;
 
   private progress = 0;
   private currentRound = 1;
   isBreak = false;
-  isFirstRound = true;
   isCountdownCancelled = false;
 
-  onStartTimer = false;
   intervalId = null;
   isPause = false;
 
-  constructor(private audioService: AudioService) { }
+  constructor(private audioService: AudioService, 
+    private trainingService: TrainingService, 
+    private router: Router) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    const timerSettings = this.trainingService.getTimerSettings();
+    this.rounds = timerSettings.rounds;
+    this.intervalTime = timerSettings.intervalTime;
+    this.breakIntervalTime = timerSettings.breakIntervalTime;
+    this.startTimer();
+  }
 
   // always when the start button is clicked reset the values
   initTimer() {
-    this.isFirstRound = true;
     this.isBreak = false;
+    this.isPause = false;
     this.currentRound = 1;
     this.progress = 0;
-    this.isCountdownCancelled = false;
-    this.isPause = false;
   }
 
   // reset to default view
   reset() {
-    this.isFirstRound = true;
     this.isBreak = false;
     this.currentRound = 0;
     this.progress = 0;
     this.isCountdownCancelled = true;
     this.isPause = false;
 
-    if(this.intervalId) {
+    if (this.intervalId) {
       clearInterval(this.intervalId);
     }
 
@@ -53,16 +57,8 @@ export class TimerComponent implements OnInit {
 
   startTimer() {
     this.initTimer();
-    this.onStartTimer = true;
-  }
-
-  onCountdownComplete(isSuccessfullyCounted) {
-    if (isSuccessfullyCounted) {
-      this.isFirstRound = false;
-      this._startRound(this.intervalTime);
-    } else {
-      this.isCountdownCancelled = true;
-    }
+    this.audioService.playAirhorn();
+    this._startRound(this.intervalTime);
   }
 
   private _startRound(intervalTime: number) {
@@ -131,13 +127,13 @@ export class TimerComponent implements OnInit {
     this.isPause = false;
     this.audioService.playAirhorn();
   }
-  
+
   onCancel() {
-    this.reset();
+    clearInterval(this.intervalId);
+    this.router.navigate(['/']);
   }
 
   onFinish() {
-    // TODO: SAVE THE WORKOUT
     this.audioService.playFinish();
     this.reset();
   }
@@ -154,11 +150,4 @@ export class TimerComponent implements OnInit {
     return this.currentRound;
   }
 
-  getGetReadyTime() {
-    return this.getReadyTime;
-  }
-
-  shouldShowCountdown(): boolean {
-    return !this.isCountdownCancelled && this.isFirstRound && this.onStartTimer
-  }
 }

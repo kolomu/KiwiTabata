@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 
 import { NgCircleProgressModule } from 'ng-circle-progress';
@@ -10,25 +11,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { SidenavComponent } from './header/sidenav/sidenav.component';
 
 import { reducers } from './app.reducers';
-import { StartComponent } from './start/start.component';
 import { TimerComponent } from './timer/timer.component';
-import { CountdownComponent } from './timer/countdown/countdown.component';
-import { MinuteSecondsPipe } from './shared/minute-seconds.pipe';
+import { CountdownComponent } from './countdown/countdown.component';
+import { StartComponent } from './start/start.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    SidenavComponent,
-    StartComponent,
     TimerComponent,
     CountdownComponent,
-    MinuteSecondsPipe
+    StartComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +32,8 @@ import { MinuteSecondsPipe } from './shared/minute-seconds.pipe';
     MaterialModule,
     StoreModule.forRoot(reducers),
     FlexLayoutModule,
-    NgCircleProgressModule.forRoot()
+    NgCircleProgressModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
