@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
 
 import { reducers } from './app.reducers';
 import { TimerComponent } from './timer/timer.component';
-import { CountdownComponent } from './timer/countdown/countdown.component';
+import { CountdownComponent } from './countdown/countdown.component';
 import { StartComponent } from './start/start.component';
 
 

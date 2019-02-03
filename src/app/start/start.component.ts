@@ -20,6 +20,6 @@ export class StartComponent {
   start(form: NgForm) {
     const settings = <TimerSettings>form.value;
     this.trainingService.setTimerSettings(settings);
-    this.router.navigate(['/training']);
+    this.router.navigate(['/training-start']);
   }
 }

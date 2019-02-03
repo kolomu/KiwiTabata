@@ -1,14 +1,8 @@
 <div class="timer" fxLayout fxLayoutAlign="center center">
 
-  <app-countdown 
-    [value]="getGetReadyTime()" 
-    (secondsRemaining)="announceRemainingSeconds($event)" 
-    (finish)="onCountdownComplete($event)" 
-    *ngIf="shouldShowCountdown()"></app-countdown>
-
   <div class="wrapper">
     <!-- WORKOUT TIMER -->
-    <circle-progress *ngIf="!isFirstRound && !isBreak"
+    <circle-progress *ngIf="!isBreak"
       [percent]="getProgressValue()"
       [radius]="100"
       [outerStrokeWidth]="16"
@@ -27,7 +21,7 @@
     ></circle-progress>
 
     <!-- Break TIMER -->
-    <circle-progress *ngIf="!isFirstRound && isBreak"
+    <circle-progress *ngIf="isBreak"
       [percent]="getProgressValue()"
       [radius]="100"
       [outerStrokeWidth]="16"
@@ -45,7 +39,7 @@
       [responsive]="true"
     ></circle-progress>
 
-    <div class="control-buttons" fxLayout fxLayoutAlign="center center" fxLayoutGap="1rem" *ngIf="!isFirstRound">
+    <div class="control-buttons" fxLayout fxLayoutAlign="center center" fxLayoutGap="1rem">
       <button mat-raised-button color="accent" type="button" (click)="onPause()" *ngIf="!isPause">Pause</button>
       <button mat-raised-button color="primary" type="button" (click)="onContinue()" *ngIf="isPause">Continue</button>
       <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancel</button>
