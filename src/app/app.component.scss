@@ -1,6 +1,27 @@
+@import '~@angular/material/theming';
+
+@mixin candy-app-theme($theme) {
+    // Extract the palettes you need from the theme definition.
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent); // Define any styles affected by the theme.
+    main {
+        // Use mat-color to extract individual colors a palette.
+        background-color: mat-color($primary, A400);
+        color: mat-color($accent, darker);
+    }
+}
+
+
+@mixin candy-app-typography($config) {
+    .main {
+      font: {
+        family: mat-font-family($config, body-1);
+        size: mat-font-size($config, body-1);
+        weight: mat-font-weight($config, body-1);
+      }
+    }
+  }
+
 main {
     height: 100%;
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    font-family: 'Roboto', sans-serif;
 }
